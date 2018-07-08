@@ -1,9 +1,7 @@
 package com.apps.kunalfarmah.kalculator;
 
 
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -206,7 +204,7 @@ public class Scientific extends Fragment implements View.OnClickListener {
                 }
                 else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
                         && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))){
+                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
 
 
 
@@ -242,7 +240,7 @@ public class Scientific extends Fragment implements View.OnClickListener {
                 }
                 else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
                         && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))){
+                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
 
 
 
@@ -278,7 +276,7 @@ public class Scientific extends Fragment implements View.OnClickListener {
                 }
                 else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
                         && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))){
+                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
 
 
 
@@ -315,7 +313,7 @@ public class Scientific extends Fragment implements View.OnClickListener {
                 }
                 else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
                         && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))){
+                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
 
 
 
@@ -346,7 +344,7 @@ public class Scientific extends Fragment implements View.OnClickListener {
                 }
                 else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
                         && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))){
+                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
 
 
 
@@ -377,7 +375,8 @@ public class Scientific extends Fragment implements View.OnClickListener {
                 }
                 else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
                         && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))) {
+                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
+
 
 
                     if (!isinverse) {
