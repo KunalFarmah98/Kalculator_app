@@ -14,10 +14,6 @@ import android.widget.TextView;
 import static java.lang.Double.NaN;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-
 public class Scientific extends Fragment implements View.OnClickListener {
 
     String angleval = "DEG";
