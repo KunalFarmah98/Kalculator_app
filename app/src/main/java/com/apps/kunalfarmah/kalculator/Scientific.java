@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import static java.lang.Double.NaN;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,12 +28,13 @@ public class Scientific extends Fragment implements View.OnClickListener {
     boolean trigo = false;
 
     public Double temp = 0d;
+    Double NaNi = NaN;
     public String val = "";
 
     Double ans = 0d;
 
 
-    int invpressed=0;
+    int invpressed = 0;
     int radpressed = 0;
 
     Button sin;
@@ -80,7 +83,7 @@ public class Scientific extends Fragment implements View.OnClickListener {
         operator2 = getActivity().findViewById(R.id.operator2);
 
 
-        pi= fragment.findViewById(R.id.pi);
+        pi = fragment.findViewById(R.id.pi);
         sin = fragment.findViewById(R.id.sin);
         cos = fragment.findViewById(R.id.cos);
         tan = fragment.findViewById(R.id.tan);
@@ -91,8 +94,6 @@ public class Scientific extends Fragment implements View.OnClickListener {
         inv = fragment.findViewById(R.id.inv);
         rad = fragment.findViewById(R.id.rad);
         close = fragment.findViewById(R.id.close);
-
-
 
 
         sin.setOnClickListener(this);
@@ -114,7 +115,7 @@ public class Scientific extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        var.sci_used=true;
+        var.sci_used = true;
 
         switch (v.getId()) {
 
@@ -125,19 +126,17 @@ public class Scientific extends Fragment implements View.OnClickListener {
                     if (!var.n1isfilled && ops.getText().toString().equals(".")) {
                         n1.setText("\u03C0");
                         var.n1isfilled = true;
-                    } else if (var.n1isfilled && !n1.getText().toString().equals("\u03C0")&& ops.getText().toString().equals(".")) {
+                    } else if (var.n1isfilled && !n1.getText().toString().equals("\u03C0") && ops.getText().toString().equals(".")) {
                         n1.append("\u03C0");
                         var.n1isfilled = true;
                     } else if (!var.n2isfilled && !ops.getText().toString().equals(".")) {
                         n2.setText("\u03C0");
                         var.n2isfilled = true;
-                        res.setText(var.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString()).toString());
 
 
-                    } else if (var.n1isfilled && var. n2isfilled &&!n2.getText().toString().equals("\u03C0")&& !(ops.getText().toString().equals("."))
+                    } else if (var.n1isfilled && var.n2isfilled && !n2.getText().toString().equals("\u03C0") && !(ops.getText().toString().equals("."))
                             ) {
                         n2.append("\u03C0");
-                        res.setText(var.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString()).toString());
                     }
                 } else if (var.equalispressed) {
                     if (var.n1isfilled && !ops.getText().toString().equals(".") && var.f == 0) {
@@ -150,28 +149,44 @@ public class Scientific extends Fragment implements View.OnClickListener {
                     } else if (var.n1isfilled && !var.n2isfilled && !ops.getText().toString().equals(".") && var.f == 1) {
                         n2.setText("\u03C0");
                         var.n2isfilled = true;
-                        res.setText(var.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString()).toString());
 
                     } else if (var.n1isfilled && var.n2isfilled && !(ops.getText().toString().equals("."))
                             ) {
                         n2.append("\u03C0");
 
-                        res.setText(var.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString()).toString());
                     }
+                }
+
+                if (!operator2.isShown()) {
+
+                    if(!var.sci_used) ans = var.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
+                    else if(var.sci_used) ans =result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    if(ans.toString().contains("E"))
+                        res.setText(var.ans_setting(ans));
+
+                    else
+                        res.setText(ans.toString());;
+                } else if (operator2.isShown()) {
+                    ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    if(ans.toString().contains("E"))
+                        res.setText(var.ans_setting(ans));
+
+                    else
+                        res.setText(ans.toString());;
                 }
                 break;
 
             case R.id.rad:
                 visualsci();
                 ++radpressed;
-                if(radpressed%2!=0) {
+                if (radpressed % 2 != 0) {
                     angleval = "RAD";
                     angle.setText(angleval);
                     rad.setText("DEG");
-                }
-
-                else{
-                    angleval="DEG";
+                } else {
+                    angleval = "DEG";
                     angle.setText("DEG");
                     rad.setText("RAD");
                 }
@@ -188,31 +203,60 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 visualsci();
 
-                if(n1.getText().toString().equals("0"))
+                if (n1.getText().toString().equals("0")) {
                     n1.setText("");
-                var.n1isfilled=true;
+                    var.n1isfilled = true;
+                }
 
-                if(ops.getText().toString().equals(".")) {
+                if (ops.getText().toString().equals(".")) {
 
                     if (!isinverse)
                         ops.setText("sin");
                     else
                         ops.setText("(arc)sin");
 
-                    trigo=true;
-                    var.sci_ops=true;
-                }
-                else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
-                        && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
+                    trigo = true;
+                    var.sci_ops = true;
+                } else if ((var.n1isfilled && var.n2isfilled && !ops.getText().toString().equals("."))) {
 
+                    trigo = true;
+                    if (operator2.isShown()) {
+                        operator2.setText("");
+                        operator2.setVisibility(View.GONE);
+                    }
+
+                    if (!isinverse)
+                        ops.setText("sin");
+
+                    else ops.setText("(arc)sin");
+
+                    if (!var.equalispressed) {
+
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+                    } else if (var.equalispressed) {
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+
+                        var.f = 1;
+
+
+                    }
+                } else if (!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
+                        && !ops.getText().toString().equals("cot") && !ops.getText().toString().equals("sec") && !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
+                        && !ops.getText().toString().equals("(arc)cos") && !ops.getText().toString().equals("(arc)tan")) && !ops.getText().toString().equals("log") && !ops.getText().toString().equals("ln") && !ops.getText().toString().equals("sqrt") && !ops.getText().toString().equals("10^")) {
 
 
                     if (!isinverse) {
                         operator2.setText("sin");
                         operator2.setVisibility(View.VISIBLE);
-                    }
-                    else {
+                    } else {
                         operator2.setText("(arc)sin");
                         operator2.setVisibility(View.VISIBLE);
                     }
@@ -224,31 +268,58 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 visualsci();
 
-                if(n1.getText().toString().equals("0"))
+                if (n1.getText().toString().equals("0"))
                     n1.setText("");
-                var.n1isfilled=true;
+                var.n1isfilled = true;
 
-                if(ops.getText().toString().equals(".")) {
+                if (ops.getText().toString().equals(".")) {
 
                     if (!isinverse)
                         ops.setText("cos");
                     else
                         ops.setText("(arc)cos");
 
-                    trigo=true;
-                    var.sci_ops=true;
-                }
-                else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
-                        && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
+                    trigo = true;
+                    var.sci_ops = true;
+                } else if ((var.n1isfilled && var.n2isfilled && !ops.getText().toString().equals("."))) {
 
+                    trigo = true;
+                    if (operator2.isShown()) {
+                        operator2.setText("");
+                        operator2.setVisibility(View.GONE);
+                    }
+
+                    if (!isinverse)
+                        ops.setText("cos");
+
+                    else ops.setText("(arc)cos");
+
+                    if (!var.equalispressed) {
+
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+                    } else if (var.equalispressed) {
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+
+                        var.f = 1;
+
+                    }
+                } else if (!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
+                        && !ops.getText().toString().equals("cot") && !ops.getText().toString().equals("sec") && !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
+                        && !ops.getText().toString().equals("(arc)cos") && !ops.getText().toString().equals("(arc)tan")) && !ops.getText().toString().equals("log") && !ops.getText().toString().equals("ln") && !ops.getText().toString().equals("sqrt") && !ops.getText().toString().equals("10^")) {
 
 
                     if (!isinverse) {
                         operator2.setText("cos");
                         operator2.setVisibility(View.VISIBLE);
-                    }
-                    else {
+                    } else {
                         operator2.setText("(arc)cos");
                         operator2.setVisibility(View.VISIBLE);
                     }
@@ -260,31 +331,58 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 visualsci();
 
-                if(n1.getText().toString().equals("0"))
+                if (n1.getText().toString().equals("0"))
                     n1.setText("");
-                var.n1isfilled=true;
+                var.n1isfilled = true;
 
-                if(ops.getText().toString().equals(".")) {
+                if (ops.getText().toString().equals(".")) {
 
                     if (!isinverse)
                         ops.setText("tan");
                     else
                         ops.setText("(arc)tan");
 
-                    var.sci_ops=true;
-                    trigo=true;
-                }
-                else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
-                        && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
+                    var.sci_ops = true;
+                    trigo = true;
+                } else if ((var.n1isfilled && var.n2isfilled && !ops.getText().toString().equals("."))) {
 
+                    trigo = true;
+                    if (operator2.isShown()) {
+                        operator2.setText("");
+                        operator2.setVisibility(View.GONE);
+                    }
+
+                    if (!isinverse)
+                        ops.setText("tan");
+
+                    else ops.setText("(arc)tan");
+
+                    if (!var.equalispressed) {
+
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+                    } else if (var.equalispressed) {
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+
+                        var.f = 1;
+
+                    }
+                } else if (!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
+                        && !ops.getText().toString().equals("cot") && !ops.getText().toString().equals("sec") && !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
+                        && !ops.getText().toString().equals("(arc)cos") && !ops.getText().toString().equals("(arc)tan")) && !ops.getText().toString().equals("log") && !ops.getText().toString().equals("ln") && !ops.getText().toString().equals("sqrt") && !ops.getText().toString().equals("10^")) {
 
 
                     if (!isinverse) {
                         operator2.setText("tan");
                         operator2.setVisibility(View.VISIBLE);
-                    }
-                    else {
+                    } else {
                         operator2.setText("(arc)tan");
                         operator2.setVisibility(View.VISIBLE);
                     }
@@ -296,25 +394,48 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 visualsci();
 
-                if(n1.getText().toString().equals("0"))
+                if (n1.getText().toString().equals("0"))
                     n1.setText("");
-                var.n1isfilled=true;
+                var.n1isfilled = true;
 
-                if(ops.getText().toString().equals(".")) {
+                if (ops.getText().toString().equals(".")) {
 
                     if (!isinverse)
                         ops.setText("sec");
-//                    else
-//                        ops.setText("(arc)sec");
 
-                    trigo=true;
-                    var.sci_ops=true;
+                    trigo = true;
+                    var.sci_ops = true;
 
-                }
-                else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
-                        && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
+                } else if ((var.n1isfilled && var.n2isfilled && !ops.getText().toString().equals("."))) {
 
+                    trigo = true;
+                    if (operator2.isShown()) {
+                        operator2.setText("");
+                        operator2.setVisibility(View.GONE);
+                    }
+
+                    ops.setText("sec");
+
+                    if (!var.equalispressed) {
+
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+                    } else if (var.equalispressed) {
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+
+                        var.f = 1;
+
+                    }
+                } else if (!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
+                        && !ops.getText().toString().equals("cot") && !ops.getText().toString().equals("sec") && !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
+                        && !ops.getText().toString().equals("(arc)cos") && !ops.getText().toString().equals("(arc)tan")) && !ops.getText().toString().equals("log") && !ops.getText().toString().equals("ln") && !ops.getText().toString().equals("sqrt") && !ops.getText().toString().equals("10^")) {
 
 
                     if (!isinverse) {
@@ -329,23 +450,48 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 visualsci();
 
-                if(n1.getText().toString().equals("0"))
+                if (n1.getText().toString().equals("0"))
                     n1.setText("");
-                var.n1isfilled=true;
+                var.n1isfilled = true;
 
-                if(ops.getText().toString().equals(".")) {
+                if (ops.getText().toString().equals(".")) {
 
                     if (!isinverse)
                         ops.setText("cosec");
 
 
-                    trigo=true;
-                    var.sci_ops=true;
-                }
-                else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
-                        && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
+                    trigo = true;
+                    var.sci_ops = true;
+                } else if ((var.n1isfilled && var.n2isfilled && !ops.getText().toString().equals("."))) {
 
+                    trigo = true;
+                    if (operator2.isShown()) {
+                        operator2.setText("");
+                        operator2.setVisibility(View.GONE);
+                    }
+
+                    ops.setText("cosec");
+
+                    if (!var.equalispressed) {
+
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+                    } else if (var.equalispressed) {
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+
+                        var.f = 1;
+
+                    }
+                } else if (!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
+                        && !ops.getText().toString().equals("cot") && !ops.getText().toString().equals("sec") && !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
+                        && !ops.getText().toString().equals("(arc)cos") && !ops.getText().toString().equals("(arc)tan")) && !ops.getText().toString().equals("log") && !ops.getText().toString().equals("ln") && !ops.getText().toString().equals("sqrt") && !ops.getText().toString().equals("10^")) {
 
 
                     if (!isinverse) {
@@ -360,23 +506,47 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 visualsci();
 
-                if(n1.getText().toString().equals("0"))
+                if (n1.getText().toString().equals("0"))
                     n1.setText("");
-                var.n1isfilled=true;
+                var.n1isfilled = true;
 
-                if(ops.getText().toString().equals(".")) {
+                if (ops.getText().toString().equals(".")) {
 
                     if (!isinverse)
                         ops.setText("cot");
 
 
-                    trigo=true;
-                    var.sci_ops=true;
-                }
-                else if(!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
-                        && !ops.getText().toString().equals("cot")&& !ops.getText().toString().equals("sec")&& !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
-                        && !ops.getText().toString().equals("(arc)cos")&& !ops.getText().toString().equals("(arc)tan"))&& !ops.getText().toString().equals("log")&& !ops.getText().toString().equals("ln")){
+                    trigo = true;
+                    var.sci_ops = true;
+                } else if ((var.n1isfilled && var.n2isfilled && !ops.getText().toString().equals("."))) {
+                    trigo = true;
+                    if (operator2.isShown()) {
+                        operator2.setText("");
+                        operator2.setVisibility(View.GONE);
+                    }
 
+                    ops.setText("cot");
+
+                    if (!var.equalispressed) {
+
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+                    } else if (var.equalispressed) {
+                        n1.setText("");
+                        var.n1isfilled = true;
+
+                        n2.setText("0");
+                        var.n2isfilled = false;
+
+                        var.f = 1;
+
+                    }
+                } else if (!ops.getText().toString().equals(".") && (!ops.getText().toString().equals("sin") && !ops.getText().toString().equals("cos") && !ops.getText().toString().equals("tan")
+                        && !ops.getText().toString().equals("cot") && !ops.getText().toString().equals("sec") && !ops.getText().toString().equals("cosec") && !ops.getText().toString().equals("(arc)sin")
+                        && !ops.getText().toString().equals("(arc)cos") && !ops.getText().toString().equals("(arc)tan")) && !ops.getText().toString().equals("log") && !ops.getText().toString().equals("ln") && !ops.getText().toString().equals("sqrt") && !ops.getText().toString().equals("10^")) {
 
 
                     if (!isinverse) {
@@ -389,7 +559,7 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
             case R.id.inv:
                 ++invpressed;
-                if(invpressed%2!=0) {
+                if (invpressed % 2 != 0) {
                     isinverse = true;
                     inv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     sec.setBackgroundColor(getResources().getColor(R.color.not_allowed));
@@ -397,9 +567,8 @@ public class Scientific extends Fragment implements View.OnClickListener {
                     cot.setBackgroundColor(getResources().getColor(R.color.not_allowed));
 
 
-                }
-                else{
-                    isinverse=false;
+                } else {
+                    isinverse = false;
                     inv.setBackgroundColor(getResources().getColor(R.color.bck));
                     sec.setBackgroundColor(getResources().getColor(R.color._default));
                     cosec.setBackgroundColor(getResources().getColor(R.color._default));
@@ -422,13 +591,10 @@ public class Scientific extends Fragment implements View.OnClickListener {
                         n2.setText("0");
                         var.n2isfilled = false;
                     }
-                }
-
-                else if(!var.n2isfilled && !operator2.getText().toString().equals("")){
+                } else if (!var.n2isfilled && !operator2.getText().toString().equals("")) {
                     operator2.setText("");
                     operator2.setVisibility(View.GONE);
-                }
-                else if (!var.n2isfilled && !ops.getText().toString().equals(".")) {
+                } else if (!var.n2isfilled && !ops.getText().toString().equals(".")) {
                     ops.setText(".");
 
                 } else if (!var.n2isfilled && ops.getText().toString().equals(".") && var.n1isfilled) {
@@ -447,16 +613,18 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
 
                 if (!operator2.isShown()) {
-                    if(n2.getText().toString().equals("-")) {
+                    if (n2.getText().toString().equals("-")) {
                         n2.setText("0");
                         var.n2isfilled = false;
                     }
-                    if(!var.sci_used) ans = var.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
-                    else if(var.sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
+                    if (!var.sci_used)
+                        ans = var.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
+                    else if (var.sci_used)
+                        ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
                     ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                     res.setText(ans.toString());
                 } else if (operator2.isShown()) {
-                    if(n2.getText().toString().equals("-")) {
+                    if (n2.getText().toString().equals("-")) {
                         n2.setText("0");
                         var.n2isfilled = false;
                     }
@@ -476,11 +644,10 @@ public class Scientific extends Fragment implements View.OnClickListener {
     public Double result(String n1, String n2, String ops, String ops2) {
 
 
-
-        if(!ops2.equals("")){
+        if (!ops2.equals("")) {
             String temp = ops2;
-            ops2=ops;
-            ops=temp;
+            ops2 = ops;
+            ops = temp;
         }
 
         if (n1.equals("\u03C0")) {
@@ -532,6 +699,12 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
         if(n2.contains("e")){
 
+
+            if(n2.charAt(0) == 'e'){
+                res.setText("Syntax Error");
+                return Double.parseDouble(n1);
+            }
+
             int len = n2.length();
 
             int index = n2.indexOf("e");
@@ -539,13 +712,37 @@ public class Scientific extends Fragment implements View.OnClickListener {
             String num = n2.substring(0, (index));  // getting percentage
             String pow = n2.substring(index + 1, len);  // getting number to process
 
-            temp = Double.parseDouble(num) * Math.pow(10d,Double.parseDouble(pow));
+            if(!pow.equals(""))
+                temp = Double.parseDouble(num) * Math.pow(10d,Double.parseDouble(pow));
+
+            else
+                temp = Double.parseDouble(num)*Math.E;
 
             n2 = temp.toString();
 
         }
 
-        if(n2.contains("^")){
+        if(n2.contains("\u03C0")){
+
+
+            if(n2.charAt(0) == '\u03C0'){
+                res.setText("Syntax Error");
+                return Double.parseDouble(n1);
+            }
+
+            int len = n2.length();
+
+            int index = n2.indexOf("\u03C0");
+
+            String num = n2.substring(0, (index));  // getting percentage
+
+
+            temp = Double.parseDouble(num)*Math.round(Math.PI*1000000.0)/1000000.0;
+
+            n2 = temp.toString();
+
+        }
+        if (n2.contains("^")) {
 
             int len = n2.length();
 
@@ -554,31 +751,32 @@ public class Scientific extends Fragment implements View.OnClickListener {
             String num = n2.substring(0, (index));  // getting percentage
             String pow = n2.substring(index + 1, len);  // getting number to process
 
-            temp = Math.pow(Double.parseDouble(n1),Double.parseDouble(n2));
+            if (!pow.equals(""))
+
+                temp = Math.pow(Double.parseDouble(num), Double.parseDouble(pow));
+
+            else
+                temp = Double.parseDouble(num);
 
             n2 = temp.toString();
 
         }
 
 
-
         switch (ops) {
             case "sin":
                 if (angleval.equals("DEG")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2))) :
                                 java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2)));
                         ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         res.setText(ans.toString());
-                    }
-
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
 
                         temp = java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
 
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
                     ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
@@ -586,44 +784,43 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.sin((Double.parseDouble(n2))) :
                                 java.lang.Math.sin((Double.parseDouble(n2)));
-                    }
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
 
                         temp = java.lang.Math.sin((Double.parseDouble(n2)));    // calculating the sin result
 
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
 
 
                 }
 
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
-
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
                 break;
 
             case "cos":
                 if (angleval.equals("DEG")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2))) :
                                 java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2)));
                         ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         res.setText(ans.toString());
-                    }
-
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
 
                         temp = java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
 
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
                     ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
@@ -631,42 +828,42 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.cos((Double.parseDouble(n2))) :
                                 java.lang.Math.cos((Double.parseDouble(n2)));
-                    }
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
 
                         temp = java.lang.Math.cos((Double.parseDouble(n2)));    // calcuating the sin result
 
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
 
 
                 }
 
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
                 break;
 
             case "tan":
                 if (angleval.equals("DEG")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2))) :
                                 java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2)));
                         ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         res.setText(ans.toString());
-                    }
-
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
 
                         temp = java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
 
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
                     ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
@@ -674,43 +871,42 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.tan((Double.parseDouble(n2))) :
                                 java.lang.Math.tan((Double.parseDouble(n2)));
-                    }
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
 
                         temp = java.lang.Math.tan((Double.parseDouble(n2)));    // calculating the sin result
 
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
 
 
                 }
-
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
 
                 break;
 
             case "sec":
                 if (angleval.equals("DEG")) {
 
-                    if(ops2.equals("")) {
-                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d/java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2)))) :
-                                1d/ java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2)));
+                    if (ops2.equals("")) {
+                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d / java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2)))) :
+                                1d / java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2)));
                         ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         res.setText(ans.toString());
-                    }
+                    } else if (!ops2.equals("")) {
 
+                        temp = 1d / java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
 
-                    else if(!ops2.equals("")){
-
-                        temp = 1d/java.lang.Math.cos(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
-
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
                     ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
@@ -718,43 +914,43 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
-                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d/java.lang.Math.cos((Double.parseDouble(n2)))) :
-                                1d/ java.lang.Math.cos((Double.parseDouble(n2)));
-                    }
+                    if (ops2.equals("")) {
+                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d / java.lang.Math.cos((Double.parseDouble(n2)))) :
+                                1d / java.lang.Math.cos((Double.parseDouble(n2)));
+                    } else if (!ops2.equals("")) {
 
-                    else if(!ops2.equals("")){
+                        temp = 1d / java.lang.Math.cos((Double.parseDouble(n2)));    // calcuating the sin result
 
-                        temp = 1d/java.lang.Math.cos((Double.parseDouble(n2)));    // calcuating the sin result
-
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
 
 
                 }
 
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
                 break;
 
 
             case "cosec":
                 if (angleval.equals("DEG")) {
 
-                    if(ops2.equals("")) {
-                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d/java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2)))) :
-                                1d/ java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2)));
+                    if (ops2.equals("")) {
+                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d / java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2)))) :
+                                1d / java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2)));
                         ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         res.setText(ans.toString());
-                    }
+                    } else if (!ops2.equals("")) {
 
+                        temp = 1d / java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
 
-                    else if(!ops2.equals("")){
-
-                        temp = 1d/java.lang.Math.sin(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
-
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
                     ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
@@ -762,41 +958,40 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
-                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d/java.lang.Math.sin((Double.parseDouble(n2)))) :
-                                1d/ java.lang.Math.sin((Double.parseDouble(n2)));
-                    }
+                    if (ops2.equals("")) {
+                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d / java.lang.Math.sin((Double.parseDouble(n2)))) :
+                                1d / java.lang.Math.sin((Double.parseDouble(n2)));
+                    } else if (!ops2.equals("")) {
 
-                    else if(!ops2.equals("")){
+                        temp = 1d / java.lang.Math.sin((Double.parseDouble(n2)));    // calcuating the sin result
 
-                        temp = 1d/java.lang.Math.sin((Double.parseDouble(n2)));    // calcuating the sin result
-
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
 
 
                 }
-
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
                 break;
             case "cot":
                 if (angleval.equals("DEG")) {
 
-                    if(ops2.equals("")) {
-                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d/java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2)))) :
-                                1d/ java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2)));
+                    if (ops2.equals("")) {
+                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d / java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2)))) :
+                                1d / java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2)));
                         ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         res.setText(ans.toString());
-                    }
+                    } else if (!ops2.equals("")) {
 
+                        temp = 1d / java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
 
-                    else if(!ops2.equals("")){
-
-                        temp = 1d/java.lang.Math.tan(Math.toRadians(Double.parseDouble(n2)));    // calcuating the sin result
-
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
                     ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
@@ -804,24 +999,27 @@ public class Scientific extends Fragment implements View.OnClickListener {
 
                 } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
-                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d/java.lang.Math.tan((Double.parseDouble(n2)))) :
-                                1d/ java.lang.Math.tan((Double.parseDouble(n2)));
-                    }
+                    if (ops2.equals("")) {
+                        ans = !n1.equals("") ? Double.parseDouble(n1) * (1d / java.lang.Math.tan((Double.parseDouble(n2)))) :
+                                1d / java.lang.Math.tan((Double.parseDouble(n2)));
+                    } else if (!ops2.equals("")) {
 
-                    else if(!ops2.equals("")){
+                        temp = 1d / java.lang.Math.tan((Double.parseDouble(n2)));    // calcuating the sin result
 
-                        temp = 1d/java.lang.Math.tan((Double.parseDouble(n2)));    // calcuating the sin result
-
-                        ans = var.result(n1, temp.toString() , ops2);   // passing to the parent activity result function
+                        ans = var.result(n1, temp.toString(), ops2);   // passing to the parent activity result function
 
                     }
 
 
                 }
 
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
                 break;
 
             case "(arc)sin":
@@ -835,23 +1033,25 @@ public class Scientific extends Fragment implements View.OnClickListener {
                         temp = Math.toDegrees(java.lang.Math.asin(Double.parseDouble(n2)));
                         ans = var.result(n1, temp.toString(), ops2);
                     }
-                }
-                else if(angleval.equals("RAD")) {
+                } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
 
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.asin(Double.parseDouble(n2)) :
                                 (java.lang.Math.asin(Double.parseDouble(n2)));
-                    }
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
                         temp = (java.lang.Math.asin(Double.parseDouble(n2)));
                         ans = var.result(n1, temp.toString(), ops2);
                     }
 
                 }
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
                 break;
 
             case "(arc)cos":
@@ -866,23 +1066,25 @@ public class Scientific extends Fragment implements View.OnClickListener {
                         temp = Math.toDegrees(java.lang.Math.acos(Double.parseDouble(n2)));
                         ans = var.result(n1, temp.toString(), ops2);
                     }
-                }
-                else if(angleval.equals("RAD")) {
+                } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
 
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.acos(Double.parseDouble(n2)) :
                                 (java.lang.Math.acos(Double.parseDouble(n2)));
-                    }
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
                         temp = (java.lang.Math.acos(Double.parseDouble(n2)));
                         ans = var.result(n1, temp.toString(), ops2);
                     }
 
                 }
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
                 break;
 
             case "(arc)tan":
@@ -895,31 +1097,34 @@ public class Scientific extends Fragment implements View.OnClickListener {
                         temp = Math.toDegrees(java.lang.Math.atan(Double.parseDouble(n2)));
                         ans = var.result(n1, temp.toString(), ops2);
                     }
-                }
-                else if(angleval.equals("RAD")) {
+                } else if (angleval.equals("RAD")) {
 
-                    if(ops2.equals("")) {
+                    if (ops2.equals("")) {
 
                         ans = !n1.equals("") ? Double.parseDouble(n1) * java.lang.Math.atan(Double.parseDouble(n2)) :
                                 (java.lang.Math.atan(Double.parseDouble(n2)));
-                    }
-
-                    else if(!ops2.equals("")){
+                    } else if (!ops2.equals("")) {
                         temp = (java.lang.Math.atan(Double.parseDouble(n2)));
                         ans = var.result(n1, temp.toString(), ops2);
                     }
 
                 }
-                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-                res.setText(ans.toString());
+                if (!ans.equals(NaNi)) {
+                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                    res.setText(ans.toString());
+                } else {
+                    res.setText("Nani");
+                    return NaN;
+                }
                 break;
 
             case "sqrt":
 
-                if(Double.parseDouble(n2)<0){
+                if (Double.parseDouble(n2) < 0) {
                     res.setText("NaNi");
-                    break;
+                    return NaN;
                 }
+
 
                 temp = java.lang.Math.sqrt(Double.parseDouble(n2));
                 val = temp.toString();
@@ -931,53 +1136,55 @@ public class Scientific extends Fragment implements View.OnClickListener {
                 break;
 
             case "log":
-
-                if(Double.parseDouble(n2)<0){
+                if (Double.parseDouble(n2) <= 0) {
                     res.setText("NaNi");
-                    break;
+                    return NaN;
                 }
+
 
                 temp = java.lang.Math.log10(Double.parseDouble(n2));
                 val = temp.toString();
 
-                ans = var.result(n1,temp.toString(), ops2);
+                ans = var.result(n1, temp.toString(), ops2);
                 ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                 res.setText(ans.toString());
                 break;
 
             case "ln":
-
-                if(Double.parseDouble(n2)<0){
+                if (Double.parseDouble(n2) <= 0) {
                     res.setText("NaNi");
-                    break;
+                    return NaN;
                 }
+
                 temp = java.lang.Math.log(Double.parseDouble(n2));
 
-                ans = var.result(n1,temp.toString(), ops2);
+                ans = var.result(n1, temp.toString(), ops2);
                 ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                 res.setText(ans.toString());
                 break;
 
             case "10^":
-                temp = java.lang.Math.pow(10d,Double.parseDouble(n2));
+                temp = java.lang.Math.pow(10d, Double.parseDouble(n2));
                 val = temp.toString();
-                ans = var.result(n1,val,ops2);
+                ans = var.result(n1, val, ops2);
                 ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                 res.setText(ans.toString());
                 break;
 
-
+            default:
+                ans = var.result(n1, n2, ops);
         }
 
-        if(ans < -9E12)
-            ans= -99999d;
+        if (ans > 9E12)
+            return NaN;
+
 
         return ans;
 
     }
 
 
-    private void visualsci(){
+    private void visualsci() {
 
         var.calc.setVisibility(View.VISIBLE);
         var.angle.setVisibility(View.VISIBLE);
