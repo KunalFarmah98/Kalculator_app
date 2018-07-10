@@ -15,9 +15,6 @@ import android.widget.FrameLayout;
 import static android.view.View.GONE;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AboutFragment extends Fragment {
 
     MainActivity var;

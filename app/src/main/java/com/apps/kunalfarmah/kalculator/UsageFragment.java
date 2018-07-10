@@ -14,9 +14,7 @@ import android.widget.FrameLayout;
 
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class UsageFragment extends Fragment {
 
     MainActivity var;
