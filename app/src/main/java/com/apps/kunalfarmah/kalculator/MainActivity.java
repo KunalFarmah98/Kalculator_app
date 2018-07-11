@@ -307,12 +307,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.howtouse) {
+            getSupportFragmentManager().popBackStack();
             frag.setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction().add(R.id.frag, usage).addToBackStack("usage").commit();
             return true;
         }
 
         if (id == R.id.about) {
+            getSupportFragmentManager().popBackStack();
             frag.setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction().add(R.id.frag, about).addToBackStack("about").commit();
             return true;

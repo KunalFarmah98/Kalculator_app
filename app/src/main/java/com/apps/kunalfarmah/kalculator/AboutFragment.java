@@ -126,8 +126,6 @@ public class AboutFragment extends Fragment {
         super.onStart();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-
-
     }
 
 
@@ -136,6 +134,7 @@ public class AboutFragment extends Fragment {
         super.onPause();
         frag.setVisibility(GONE);
         extra.setVisibility(View.VISIBLE);
+        getActivity().getSupportFragmentManager().popBackStack();
         getActivity().setTitle(R.string.app_name);
 
     }

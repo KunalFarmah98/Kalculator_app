@@ -66,6 +66,7 @@ public class UsageFragment extends Fragment {
         super.onPause();
         frag.setVisibility(View.GONE);
         extra.setVisibility(View.VISIBLE);
+        getActivity().getSupportFragmentManager().popBackStack();
         getActivity().setTitle(R.string.app_name);
 
     }
