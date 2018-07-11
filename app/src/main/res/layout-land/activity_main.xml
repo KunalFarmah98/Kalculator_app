@@ -95,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLines="1"
                 android:text="0"
                 android:textAlignment="textEnd"
 
@@ -108,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="."
+                android:maxLines="1"
                 android:textAlignment="textEnd"
 
                 android:textSize="@dimen/_25sdp"
@@ -119,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="."
+                android:maxLines="1"
                 android:textAlignment="textEnd"
                 android:visibility="gone"
 
@@ -128,6 +131,7 @@
 
             <TextView
                 android:id="@+id/n2"
+                android:maxLines="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -142,16 +146,6 @@
     </LinearLayout>
 
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/calci"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="bottom"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:layout_below="@+id/displaytabs"-->
-    <!--android:background="#b8faff"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:weightSum="3">-->
 
     <LinearLayout
         android:id="@+id/buttons"

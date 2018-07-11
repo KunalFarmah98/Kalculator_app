@@ -35,7 +35,6 @@
         android:id="@+id/info2"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_115sdp"
-        android:layout_above="@+id/smile"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/info1"
         android:layout_marginBottom="7dp"
@@ -150,9 +149,9 @@ If anyone finds a bug or a crash at some point, feel free to reach me at the und
         android:id="@+id/extra1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/Name"
 
         android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/Name"
         android:layout_marginBottom="103dp"
         android:text="+91 9654211634"
         android:textSize="@dimen/_15sdp" />

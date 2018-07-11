@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-       // View view = menu.findItem(R.id.tool).getActionView();
+        // View view = menu.findItem(R.id.tool).getActionView();
 
 
 
@@ -360,22 +360,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                             else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                             if(ans.toString().contains("E"))
                                 res.setText(ans_setting(ans));
 
-                            else
-                                res.setText(ans.toString());;
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                                res.setText(ans.toString());
+
+                            }
                         }
 
                         else if (operator2.isShown()) {
                             ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+
                             if(ans.toString().contains("E"))
                                 res.setText(ans_setting(ans));
 
-                            else
-                                res.setText(ans.toString());;
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                                res.setText(ans.toString());
+
+                            }
                         }
 
                     }
@@ -406,20 +413,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
 
                 }
@@ -445,20 +458,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 } else if (equalispressed) {
                     if (n1isfilled && !ops.getText().toString().equals(".") && f == 0) {
@@ -483,7 +502,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
@@ -491,12 +509,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             res.setText(ans.toString());;
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
                 break;
@@ -522,26 +543,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     if (!operator2.isShown()) {
 
-                        if (n2.length() >= 3)
-                            res.setText(result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString()).toString());
 
-                        else if (scientific.trigo)
-                            res.setText(scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString()).toString());
 
-                        else if(n2.length() == 1){
-                            res.setText(result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString()).toString());
+                        if (n2.length() >= 3) {
+                            ans= result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
+                            if(ans.toString().contains("E"))
+                                ans = Double.parseDouble(ans_setting(ans));
 
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            }
+                            res.setText(ans.toString());
+                        }
+                        else if (scientific.trigo) {
+
+                            ans =scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
+
+                            if(ans.toString().contains("E"))
+                                ans = Double.parseDouble(ans_setting(ans));
+
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            }
+
+                            res.setText(ans.toString());
+                        }
+                        else {
+                            ans= result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
+                            if(ans.toString().contains("E"))
+                                ans = Double.parseDouble(ans_setting(ans));
+
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            }
+                            res.setText(ans.toString());
                         }
                     }
                     else if (operator2.isShown() && (n2.length()>=3 || scientific.trigo )) {
+
+                        ans =scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
+
+
+                        if(ans.toString().contains("E"))
+                            ans = Double.parseDouble(ans_setting(ans));
+
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                        }
                         if (n2.length() >= 3)
-                            res.setText(scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString()).toString());
-
+                            res.setText(ans.toString());
                         else if (scientific.trigo)
-                            res.setText(scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString()).toString());
+                            res.setText(ans.toString());
 
-                        else if(n2.length() == 1){
-                            res.setText(scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString()).toString());
+                        else {
+                            res.setText(ans.toString());
 
                         }
                     }
@@ -566,30 +625,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     if (!operator2.isShown()) {
 
+
+                        if (n2.length() >= 3) {
+                            ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
+                            if (ans.toString().contains("E"))
+                                ans = Double.parseDouble(ans_setting(ans));
+
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            }
+                            res.setText(ans.toString());
+                        } else if (scientific.trigo) {
+
+                            ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
+
+                            if (ans.toString().contains("E"))
+                                ans = Double.parseDouble(ans_setting(ans));
+
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            }
+
+                            res.setText(ans.toString());
+                        } else  {
+                            ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
+                            if (ans.toString().contains("E"))
+                                ans = Double.parseDouble(ans_setting(ans));
+
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            }
+                            res.setText(ans.toString());
+                        }
+                    } else if (operator2.isShown() && (n2.length() >= 3 || scientific.trigo)) {
+
+                        ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
+
+
+                        if (ans.toString().contains("E"))
+                            ans = Double.parseDouble(ans_setting(ans));
+
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                        }
                         if (n2.length() >= 3)
-                            res.setText(result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString()).toString());
-
+                            res.setText(ans.toString());
                         else if (scientific.trigo)
-                            res.setText(scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString()).toString());
+                            res.setText(ans.toString());
 
-                        else if(n2.length() == 1){
-                            res.setText(result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString()).toString());
+                        else {
+                            res.setText(ans.toString());
 
                         }
                     }
-                    else if (operator2.isShown() && (n2.length()>=3 || scientific.trigo )) {
-                        if (n2.length() >= 3)
-                            res.setText(scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString()).toString());
-
-                        else if (scientific.trigo)
-                            res.setText(scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString()).toString());
-
-                        else if(n2.length() == 1){
-                            res.setText(scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString()).toString());
-
-                        }
-                    }
-
                 }
 
                 break;
@@ -618,20 +710,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
 
                 } else if (equalispressed) {
@@ -657,20 +755,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
                 break;
@@ -697,20 +801,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
 
                 } else if (equalispressed) {
@@ -735,20 +845,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
 
@@ -776,20 +892,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
 
                 } else if (equalispressed) {
@@ -814,20 +936,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
 
@@ -858,20 +986,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used)  ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 } else if (equalispressed) {
                     if (n1isfilled && !ops.getText().toString().equals(".") && f == 0) {
@@ -895,20 +1029,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
                 f = 0;
@@ -945,12 +1085,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             res.setText(ans.toString());;
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 } else if (equalispressed) {
                     if (n1isfilled && !ops.getText().toString().equals(".") && f == 0) {
@@ -975,20 +1118,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
 
@@ -1017,20 +1166,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 } else if (equalispressed) {
                     if (n1isfilled && !ops.getText().toString().equals(".") && f == 0) {
@@ -1056,20 +1211,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
 
@@ -1098,20 +1259,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 } else if (equalispressed) {
                     if (n1isfilled && !ops.getText().toString().equals(".") && f == 0) {
@@ -1134,20 +1301,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
 
@@ -1175,20 +1348,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 } else if (equalispressed) {
                     if (n1isfilled && !ops.getText().toString().equals(".") && f == 0) {
@@ -1213,20 +1392,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 }
 
@@ -1254,20 +1439,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (!operator2.getText().toString().equals("") ) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
                 } else if (equalispressed) {
 
@@ -1296,20 +1488,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     } else if (operator2.isShown()) {
                         ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(), operator2.getText().toString());
-                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         if(ans.toString().contains("E"))
                             res.setText(ans_setting(ans));
 
-                        else
-                            res.setText(ans.toString());;
+
+                        else {
+                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
+                            res.setText(ans.toString());
+
+                        }
                     }
 
                 }
@@ -1427,9 +1625,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 if (equalispressed && !n2.getText().toString().equals("0")) {
-                    Double n = Math.round((Double.parseDouble(res.getText().toString()))*100.0)/100.0;
-                    n1.setText(n.toString());
-                    
+                    if(res.getText().toString().contains("E")){
+                        n1.setText(ans_small(Double.parseDouble(res.getText().toString())));
+                    }
+                    else {
+                        Double n = Math.round((Double.parseDouble(res.getText().toString())) * 100.0) / 100.0;
+                        n1.setText(n.toString());
+                    }
+
                     ops.setText("+");
                     n2.setText("0");
                     n2isfilled = false;
@@ -1456,12 +1659,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             sci_used=false;
                         }
                     }
-                    ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                     if(ans.toString().contains("E"))
                         n1.setText(ans_small(ans));
 
-                    else
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                         n1.setText(ans.toString());
+
+                    }
                     n1isfilled = true;
                     ops.setText("+");
 
@@ -1479,12 +1685,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     ans = scientific.result(n1.getText().toString(), n2.getText().toString(), oldops, operator2.getText().toString());
 
-                    ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                     if(ans.toString().contains("E"))
                         n1.setText(ans_small(ans));
 
-                    else
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                         n1.setText(ans.toString());
+
+                    }
                     n1isfilled = true;
                     ops.setText("+");
                     sci_used=false;
@@ -1520,8 +1729,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 if (equalispressed && !n2.getText().toString().equals("0")) {
-                    Double n = Math.round((Double.parseDouble(res.getText().toString()))*100.0)/100.0;
-                    n1.setText(n.toString());
+                    if(res.getText().toString().contains("E")){
+                        n1.setText(ans_small(Double.parseDouble(res.getText().toString())));
+                    }
+                    else {
+                        Double n = Math.round((Double.parseDouble(res.getText().toString())) * 100.0) / 100.0;
+                        n1.setText(n.toString());
+                    }
                     ops.setText("-");
                     n2.setText("0");
                     n2isfilled = false;
@@ -1560,12 +1774,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             sci_used=false;
                         }
                     }
-                    ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                     if(ans.toString().contains("E"))
                         n1.setText(ans_small(ans));
 
-                    else
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                         n1.setText(ans.toString());
+
+                    }
                     n1isfilled = true;
                     ops.setText("-");
                     n2.setText("0");
@@ -1579,12 +1796,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //   n1.setText("");
                     ans = scientific.result(n1.getText().toString(), n2.getText().toString(), oldops, operator2.getText().toString());
 
-                    ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                     if(ans.toString().contains("E"))
                         n1.setText(ans_small(ans));
 
-                    else
-                        n1.setText(ans.toString());;
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
+                        n1.setText(ans.toString());
+
+                    }
                     n1isfilled = true;
                     ops.setText("-");
                     sci_used=false;
@@ -1605,14 +1825,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 if (!n1isfilled) {
-                  break;
+                    break;
                 }
 
                 ops.setText("X");
 
                 if (equalispressed && !n2.getText().toString().equals("0")) {
-                    Double n = Math.round((Double.parseDouble(res.getText().toString()))*100.0)/100.0;
-                    n1.setText(n.toString());
+                    if(res.getText().toString().contains("E")){
+                        n1.setText(ans_small(Double.parseDouble(res.getText().toString())));
+                    }
+                    else {
+                        Double n = Math.round((Double.parseDouble(res.getText().toString())) * 100.0) / 100.0;
+                        n1.setText(n.toString());
+                    }
                     ops.setText("X");
                     n2.setText("0");
                     sci_used=false;
@@ -1639,25 +1864,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             sci_used=false;
                         }
                     }
-                    ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                     if(ans.toString().contains("E"))
                         n1.setText(ans_small(ans));
 
-                    else
-                        n1.setText(ans.toString());;
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
+                        n1.setText(ans.toString());
+
+                    }
                     ops.setText("X");
                     n2.setText("");
                     n2isfilled = false;
                 } else if (sci_ops) {
                     //   n1.setText("");
                     ans = scientific.result(n1.getText().toString(), n2.getText().toString(), oldops, operator2.getText().toString());
-
-                    ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                     if(ans.toString().contains("E"))
                         n1.setText(ans_small(ans));
 
-                    else
-                        n1.setText(ans.toString());;
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
+                        n1.setText(ans.toString());
+
+                    }
                     n1isfilled = true;
                     ops.setText("X");
                     sci_used=false;
@@ -1677,15 +1907,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 oldops = ops.getText().toString();
 
                 if (!n1isfilled) {
-                   break;
+                    break;
 
                 }
 
                 ops.setText("/");
 
                 if (equalispressed && !n2.getText().toString().equals("0")) {
-                    Double n = Math.round((Double.parseDouble(res.getText().toString()))*100.0)/100.0;
-                    n1.setText(n.toString());
+                    if(res.getText().toString().contains("E")){
+                        n1.setText(ans_small(Double.parseDouble(res.getText().toString())));
+                    }
+                    else {
+                        Double n = Math.round((Double.parseDouble(res.getText().toString())) * 100.0) / 100.0;
+                        n1.setText(n.toString());
+                    }
                     ops.setText("/");
                     n2.setText("0");
                     n2isfilled = false;
@@ -1712,13 +1947,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             sci_used=false;
                         }
                     }
-                    ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
-
                     if(ans.toString().contains("E"))
                         n1.setText(ans_small(ans));
 
-                    else
-                        n1.setText(ans.toString());;
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
+                        n1.setText(ans.toString());
+
+                    }
                     ops.setText("/");
                     n2.setText("");
                     n2isfilled = false;
@@ -1726,12 +1963,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //   n1.setText("");
                     ans = scientific.result(n1.getText().toString(), n2.getText().toString(), oldops, operator2.getText().toString());
 
-                    ans = Math.round(ans.doubleValue() * 100.0) / 100.0;
                     if(ans.toString().contains("E"))
                         n1.setText(ans_small(ans));
 
-                    else
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 1000) / 1000.0;
                         n1.setText(ans.toString());
+
+                    }
                     ops.setText("/");
                     n2.setText("0");
                     sci_used=false;
@@ -2155,15 +2395,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     }
 
-                    ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-
-
-
                     if(ans.toString().contains("E"))
                         res.setText(ans_setting(ans));
 
-                    else
+
+                    else {
+                        ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                         res.setText(ans.toString());
+
+                    }
 
 
                 } else {
@@ -2173,13 +2413,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(!sci_used) ans = result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString());
                         else if(sci_used) ans = scientific.result(n1.getText().toString(), n2.getText().toString(), ops.getText().toString(),operator2.getText().toString());
                         if (!ans.equals( NaN)) {
-                            ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
-
                             if(ans.toString().contains("E"))
                                 res.setText(ans_setting(ans));
 
-                            else
+
+                            else {
+                                ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
                                 res.setText(ans.toString());
+
+                            }
 
                         } else {
                             ans = Math.round(ans.doubleValue() * 1000000.0) / 1000000.0;
@@ -2457,9 +2699,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        if(ans_d < -9E12)
-            ans_d = -999999d;
-        return (ans_i != 0 ? ans_i : ans_d);
+        return ans_d;
 
     }
 
@@ -2470,6 +2710,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         n2.setText("0");
         n2isfilled = false;
         res.setText("");
+
+        if(operator2.isShown()){
+            operator2.setText("");
+            operator2.setVisibility(View.GONE);
+        }
     }
 
     void resetall() {

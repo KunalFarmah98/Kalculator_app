@@ -2,7 +2,6 @@
 
 <LinearLayout android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
     android:id="@+id/skeleton"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android" >
@@ -18,7 +17,8 @@
     <TextView
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_width="wrap_content"
-        android:padding="@dimen/_10sdp"
+        android:padding="@dimen/_7sdp"
+        android:textAlignment="textStart"
         android:layout_height="wrap_content"
         android:id="@+id/text"
         android:text="Sample Text"/>
